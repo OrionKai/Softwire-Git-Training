@@ -1,24 +1,24 @@
 package com.gitTraining
 
-fun computeFibbonaciNumber(position: Int): Int {
-    if (position == 0) return 0
-    if (position < 0) {
-        return computeNegativeFibbonachi(position)
-    }
+fun computeFibbonaciNumber(position: Int?): Int {
+    val notNullPosition = position ?: 1
+    if (notNullPosition == 0) return 0
+    else if (notNullPosition < 0)
+        return computeNegativeFibbonachi(notNullPosition)
 
-    if (position == 1 || position == 2) return 1
+    if (notNullPosition <= 2) return 1
 
-    var smallFibbonachiNumber = 1
-    var largeFibbonachiNumber = 1
+    var i = 1
+    var j = 1
 
     var currentPosition = 2
-    while (currentPosition < position) {
-        val nextFibbonachiNumber = smallFibbonachiNumber + largeFibbonachiNumber
-        smallFibbonachiNumber = largeFibbonachiNumber
-        largeFibbonachiNumber = nextFibbonachiNumber
+    while (currentPosition < notNullPosition) {
+        val temp = i
+        i = j
+        j += temp
         currentPosition ++
     }
-    return largeFibbonachiNumber
+    return j
 }
 
 fun computeFibbonachiArray(start: Int, end: Int, efficient: Boolean = false): List<Int> {
